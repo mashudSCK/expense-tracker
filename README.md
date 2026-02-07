@@ -1,68 +1,172 @@
-# CodeIgniter 4 Application Starter
+# 💰 Expense Tracker System
 
-## What is CodeIgniter?
+A comprehensive web-based expense management application built with CodeIgniter 4, featuring multi-currency support with automatic conversion to Philippine Peso (PHP).
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## 📋 Overview
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+The Expense Tracker System enables users to efficiently record, manage, and track their daily expenses across multiple currencies. The system provides secure authentication, role-based access control, and real-time currency conversion through external API integration.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## ✨ Key Features
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- **🔐 Secure Authentication**: User login/logout with password hashing
+- **💵 Multi-Currency Support**: Track expenses in PHP, USD, and EUR
+- **🔄 Automatic Conversion**: Real-time currency conversion via ExchangeRate-API
+- **📊 Dashboard Analytics**: Expense summaries and statistics
+- **🏷️ Category Management**: Organize expenses by customizable categories
+- **👥 Role-Based Access**: Admin and regular user roles
+- **📱 Responsive Design**: Bootstrap-powered UI for all devices
+- **💾 Offline Fallback**: Cached exchange rates for offline operation
 
-## Installation & updates
+## 🛠️ Technology Stack
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- **Backend**: CodeIgniter 4 (PHP 8.1+)
+- **Database**: MySQL 5.7+
+- **Frontend**: Bootstrap 5, HTML5, CSS3, JavaScript
+- **API Integration**: ExchangeRate-API
+- **Server**: Apache (XAMPP)
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+## 📁 Project Structure
 
-## Setup
+```
+expense-tracker/
+├── app/
+│   ├── Controllers/     # Application controllers
+│   ├── Models/          # Database models
+│   ├── Views/           # User interface views
+│   ├── Libraries/       # Custom libraries (CurrencyService)
+│   ├── Filters/         # Authentication filters
+│   └── Database/        # Migrations and seeds
+├── public/              # Public web directory
+├── writable/            # Cache, logs, sessions, uploads
+├── vendor/              # Composer dependencies
+├── database_schema.sql  # Database schema file
+├── SETUP_GUIDE.md      # Detailed setup instructions
+└── SYSTEM_DOCUMENTATION.md  # Complete system documentation
+```
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## 🚀 Quick Start
 
-## Important Change with index.php
+### Prerequisites
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- **XAMPP** (Apache & MySQL)
+- **Composer** (PHP package manager)
+- **PHP 8.1 or higher**
+- Internet connection (for API and dependencies)
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### Installation
 
-**Please** read the user guide for a better explanation of how CI4 works!
+1. **Clone or extract the project** to `c:\xampp\htdocs\expense-tracker`
 
-## Repository Management
+2. **Install dependencies**
+   ```bash
+   composer install
+   ```
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+3. **Configure environment**
+   ```bash
+   copy env .env
+   ```
+   Edit `.env` and configure:
+   - Database settings
+   - Base URL: `http://localhost:8080`
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+4. **Create database**
+   - Open phpMyAdmin: `http://localhost/phpmyadmin`
+   - Create database: `expense_tracker`
+   - Import: `database_schema.sql`
 
-## Server Requirements
+5. **Start the application**
+   ```bash
+   php spark serve
+   ```
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+6. **Access the system**
+   - Open browser: `http://localhost:8080`
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+For detailed installation instructions, see [SETUP_GUIDE.md](SETUP_GUIDE.md)
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+## 👤 Default Users
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+### Admin Account
+- **Username**: `admin`
+- **Password**: `admin123`
+- **Access**: Full system access including category management
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+### Regular User Account
+- **Username**: `user1`
+- **Password**: `pass123`
+- **Access**: Personal expense management
+
+## 📚 Documentation
+
+- **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Detailed step-by-step installation guide
+- **[SYSTEM_DOCUMENTATION.md](SYSTEM_DOCUMENTATION.md)** - Complete technical documentation
+- **[PROJECT_DELIVERY.md](PROJECT_DELIVERY.md)** - Project deliverables and completion status
+
+## 🔧 System Requirements
+
+### Server Requirements
+- PHP version 8.1 or higher
+- MySQL 5.7 or higher
+- Apache web server
+
+### Required PHP Extensions
+- `intl` - Internationalization support
+- `mbstring` - Multibyte string support
+- `json` - JSON support (enabled by default)
+- `mysqlnd` - MySQL native driver
+- `libcurl` - HTTP requests for API integration
+
+## 📊 Database Schema
+
+The system uses three main tables:
+
+- **users** - User accounts and authentication
+- **categories** - Expense categories
+- **expenses** - Expense records with currency data
+
+See `database_schema.sql` for complete schema details.
+
+## 🔌 API Integration
+
+The system integrates with [ExchangeRate-API](https://www.exchangerate-api.com/) for real-time currency conversion:
+- Base currency: PHP (Philippine Peso)
+- Supported currencies: PHP, USD, EUR
+- Caching: 1-hour cache duration
+- Fallback rates for offline operation
+
+## 🛡️ Security Features
+
+- Password hashing with PHP's `password_hash()`
+- Session-based authentication
+- CSRF protection (CodeIgniter 4 default)
+- SQL injection prevention via Query Builder
+- XSS filtering on outputs
+- Auth filter for protected routes
+
+## 🎯 Usage
+
+1. **Login** with your credentials
+2. **Dashboard** - View expense summary and statistics
+3. **Add Expense** - Record new expenses in any supported currency
+4. **Manage Expenses** - Edit or delete existing expenses
+5. **Categories** (Admin only) - Add/edit expense categories
+6. **Logout** - Securely end your session
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+This is an academic project. For issues or suggestions, please refer to the system documentation.
+
+## 📞 Support
+
+For technical questions or system documentation:
+- Review [SYSTEM_DOCUMENTATION.md](SYSTEM_DOCUMENTATION.md)
+- Check [SETUP_GUIDE.md](SETUP_GUIDE.md) for installation issues
+
+---
+
+**Built with CodeIgniter 4** - [Official Documentation](https://codeigniter.com/user_guide/)
